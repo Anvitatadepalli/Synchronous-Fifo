@@ -5,12 +5,14 @@ wire [7:0]d_out;
 wire full,empty;
 wire [3:0]count;
 
-fifo_8bit dut(d_out,full,empty,count,d_in,write,read,clk,rst);
+fifo_synchronous dut(d_out,full,empty,count,d_in,write,read,clk,rst);
 
+//------clk-----//
 initial
  clk =0;
 always #10 clk=~clk;
 
+ //----- reset ---//
 initial
 begin
 rst=1;
@@ -24,6 +26,7 @@ initial
  $finish;
  end
 
+//------ memory operations ----//
 initial
  begin
   repeat(30)
