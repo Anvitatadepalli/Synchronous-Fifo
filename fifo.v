@@ -1,12 +1,12 @@
 module fifo_8bit( d_out,
                   full,
                   empty,
-				  count,
-				  d_in,
-				  write,
-				  read,
-				  clk,
-				  rst);
+		  count,
+		  d_in,
+		  write,
+		  read,
+		  clk,
+		  rst);
 				 
 input clk,rst,read,write;
 input [7:0]d_in;
@@ -20,7 +20,7 @@ reg [2:0]read_ptr,write_ptr;
 assign full= (count==8);
 assign empty=(count==0);
 
-//count
+//--------  count  ---------//
 always @(posedge clk or negedge rst)
 begin
 if (~rst) count=0;
@@ -38,7 +38,7 @@ else
  end
 end
 
-//write
+//------------  write  -----------//
 always @(posedge clk or negedge rst)
 begin
 if(write && !full)
@@ -47,7 +47,7 @@ else if (read && write)
  memory[write_ptr]<=d_in;
 end
 
-//read
+//-----------  read  -------------//
 always @(posedge clk or negedge rst)
 begin
 if(read && !empty)
@@ -56,7 +56,7 @@ else if(read && write)
  d_out<=memory[read_ptr];
 end
 
-//write_pointer
+//---------  write_pointer  --------//
 always @(posedge clk or negedge rst)
 begin
 if(~rst) write_ptr<=0;
@@ -64,7 +64,7 @@ else
  write_ptr<=((write && !full)||(read && write))? write_ptr+1 : write_ptr;
 end
 
-//read_pointer
+//--------  read_pointer  ----------//
 always @(posedge clk or negedge rst)
 begin
 if(~rst) read_ptr<=0;
