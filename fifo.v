@@ -1,12 +1,12 @@
-module fifo_8bit( d_out,
-                  full,
-                  empty,
-		  count,
-		  d_in,
-		  write,
-		  read,
-		  clk,
-		  rst);
+module fifo_synchronous( d_out,
+                         full,
+                         empty,
+		         count,
+		         d_in,
+		         write,
+		         read,
+		         clk,
+		         rst);
 				 
 input clk,rst,read,write;
 input [7:0]d_in;
